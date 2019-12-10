@@ -74,7 +74,7 @@ p.p.s. 由于Selenium2集成了WebDriver，所以不用自己下载WebDriver安�
 from selenium import webdriver
 
 # Initialize a webdriver instance
-driver = webdriver.Chrome() # If you're using Firefox, use webdriver.Firefox()
+driver = webdriver.Chrome()  # If you're using Firefox, use webdriver.Firefox()
 
 # http/https is required
 driver.get("https://www.baidu.com")
@@ -121,8 +121,8 @@ driver.find_element_by_partial_link_text()
 xpath提供了三个非常好的方法来为定位部分属性值：
 
 ```python
-driver.find_element_by_xpath("//input[contains(@id, 'bt-class')]")   # id属性包含'bt-class'，且固定不变；
- driver.find_element_by_xpath("//input[starts-with(@id, 'bt-class')]") # id属性开头为'bt-class'，且固定不变；
+driver.find_element_by_xpath("//input[contains(@id, 'bt-class')]")  # id属性包含'bt-class'，且固定不变；
+ driver.find_element_by_xpath("//input[starts-with(@id, 'bt-class')]")  # id属性开头为'bt-class'，且固定不变；
  driver.find_element_by_xpath("//input[ends-with(@id, 'bt-class')]")  # id属性结尾是'bt-class'，且固定不变；
 ```
 
@@ -168,11 +168,11 @@ from selenium.common.exceptions import NoSuchElementException
 
 driver = webdriver.Chrome()
 
-# 设置隐式等待为20秒；
+# 设置隐式等待为20秒
 driver.implicitly_wait(20)
 driver.get("http://www.baidu.com")
 
-#处理异常机制；
+# 处理异常机制
 try:
     driver.find_element_by_id("kw").send_keys('selenium')
 except NoSuchElementException as e:
@@ -186,7 +186,7 @@ finally:
 ```python
 import time
 
-time.sleep(3) # Wait for 3 seconds
+time.sleep(3)  # Wait for 3 seconds
 ```
 
 
@@ -254,7 +254,7 @@ driver.quit()
 通过以下操作即可跳到subFrame：
 
 ```python
-driver.switch_to.frame("mainFrame") # 输入iframe/frame的name属性
+driver.switch_to.frame("mainFrame")  # 输入iframe/frame的name属性
 driver.switch_to.frame("subFrame")
 ```
 
@@ -266,13 +266,13 @@ from selenium import webdriver
 driver = webdriver.Chrome()
 driver.get("https://www.testlcass.cn")
 
-#先通过xpth定位到iframe
+# 先通过xpath定位到iframe
 main = driver.find_element_by_xpath('//*[@name="main"]')
 
-#再将定位对象传给switch_to.frame()方法
+# 再将定位对象传给switch_to.frame()方法
 driver.switch_to.frame(main)
 ……
-driver.switch_to.parent_frame()#切换到上一层的frame，对于层层嵌套的frame很有用
+driver.switch_to.parent_frame()  # 切换到上一层的frame，对于层层嵌套的frame很有用
 
 ```
 
@@ -284,7 +284,7 @@ p.s. driver.switch_to.default_content()方法可以切换到最外层。
 
 ```python
 from selenium import webdriver
-# 引入 ActionChains 类
+# 引入ActionChains 类
 from selenium.webdriver.common.action_chains import ActionChains
 import time
 
@@ -306,11 +306,11 @@ driver.quit()
 使用ActionChains还能实现一些其他操作，如：
 
 ```python
-ActionChains(driver).context_click() # 右键点击
-ActionChains(driver).double_click() # 双击
-ActionChains(driver).drag_and_drop() # 拖拽
-ActionChains(driver).key_down() # 按下键盘上的某个键
-ActionChains(driver).key_up() # 松开某个键
+ActionChains(driver).context_click()  # 右键点击
+ActionChains(driver).double_click()  # 双击
+ActionChains(driver).drag_and_drop()  # 拖拽
+ActionChains(driver).key_down()  # 按下键盘上的某个键
+ActionChains(driver).key_up()  # 松开某个键
 ```
 
 对其他操作感兴趣的同学可以参考这篇博客：[Python selenium —— 模拟鼠标键盘操作(ActionChains)](https://huilansame.github.io/huilansame.github.io/archivers/mouse-and-keyboard-actionchains)
@@ -350,18 +350,18 @@ driver = webdriver.Chrome()
 driver.implicitly_wait(10)
 driver.get("http://www.baidu.com")
 
-#修改display属性为'none',把"更多产品"功能按钮隐藏；
+# 修改display属性为'none',把"更多产品"功能按钮隐藏
 js = "document.getElementsByName('tj_briicon')[0].style.display='none';"
 # 调用js脚本
 driver.execute_script(js)
 time.sleep(5)
 
-# 修改display属性为'block',把"更多产品"功能按钮显示；
+# 修改display属性为'block',把"更多产品"功能按钮显示
 js = "document.getElementsByName('tj_briicon')[0].style.display='block';"
 # 调用js脚本
 driver.execute_script(js)
 
-#判断元素是否在页面上可见；
+# 判断元素是否在页面上可见
 element = driver.find_element_by_name("tj_briicon")
 print(element.is_displayed)
 driver.find_element_by_name("tj_briicon").click()
